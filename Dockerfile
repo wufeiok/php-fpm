@@ -5,13 +5,14 @@ FROM php:8.3-fpm-alpine
 # 手工写 apk add 很容易漏包名(gd 要 libpng/libjpeg/freetype,intl 要 icu-dev …)
 COPY --from=mlocati/php-extension-installer:2 /usr/bin/install-php-extensions /usr/local/bin/
 
-# 基础镜像已自带:ctype curl dom fileinfo filter ftp iconv mbstring mysqlnd
+# 基础镜像已自带:ctype curl dom fileinfo filter iconv mbstring mysqlnd
 #                 PDO pdo_sqlite Phar posix session SimpleXML tokenizer
 #                 xml xmlreader xmlwriter 等
 # 以下是需要额外编译的:
 RUN install-php-extensions \
       bcmath \
       exif \
+      ftp \
       gd \
       gettext \
       intl \
